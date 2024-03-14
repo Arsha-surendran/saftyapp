@@ -6,6 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>asdfghjkl</h1>
+    <h1>Safty tips</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+        {%csrf_token%}
+        {{form.as_p}}
+        <button type="submit">submit</button>
+    </form>
+
 </body>
 </html>

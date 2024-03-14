@@ -17,12 +17,23 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from safty.views import *
+from django.conf.urls.static import static
+from django.conf import settings
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("register/",RegisterUserView.as_view(),name="signup"),
     path("login/",LoginView.as_view(),name="login"),
     path("userindex/",UserIndexView.as_view(),name="user-index"),
+    path("policeindex/",PoliceIndexView.as_view(),name="police-index"),
     path("add/profile",CreateUserProfileView.as_view(),name="add-profile"),
-    path("add/policeprofile",CreatepoliceProfileView.as_view(),name="add-policeprofile")
-
-]
+    path("add/policeprofile",CreatepoliceProfileView.as_view(),name="add-policeprofile"),
+    path("signout/",signoutView.as_view(),name="signout"),
+    path("complaint/",ComplaintView.as_view(),name="add-complaint") ,
+    path("nearbystation/",NearbyStationView.as_view(),name='nearby-station'),
+    path("saftytips/",SaftytipsView.as_view(),name='safty_tips'),
+    path("policedetail/",PoliceDetailView.as_view(),name='police_detail'),
+    path("emailalert/",EmailAlertView.as_view(),name='email_alert'),
+    path("adminindex/",AdminIndexView.as_view(),name="admin-index"),
+    path("complaint/<int:pk>",ComplaintDetailView.as_view(), name="complaint-detail"),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

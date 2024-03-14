@@ -13,6 +13,7 @@ class UserProfile(models.Model):
     profile_image = models.ImageField(upload_to='images/profile', blank=True, null=True)
     guardian_name = models.CharField(max_length=200, null=True)
     guardian_phone = models.CharField(max_length=20, null=True)
+    guardian_email = models.EmailField(max_length=30,null=True)
 
     def __str__(self):
         return self.user.username
@@ -34,3 +35,10 @@ class Complaint(models.Model):
 
     def __str__(self):
         return f"Complaint #{self.pk}"
+
+
+class Saftytips(models.Model):
+    description = models.TextField(max_length=500)
+    
+    def __str__(self):
+        return self.description

@@ -10,6 +10,10 @@
     {%csrf_token%}
     {{form.as_p}}
     <button type="submit">login</button>
-  </form>
+    <br>
+    <div class="text-center">
+      Create a new account? <a class="link" href="{%url 'signup'%}">Register</a>
+    </div>
+</form>
 </body>
 </html>
