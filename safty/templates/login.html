@@ -1,19 +1,76 @@
 <!DOCTYPE html>
+{%load static%}
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="{%static 'css/style.css'%}">
   <title>Document</title>
 </head>
 <body>
-  <form action="" method="post">
-    {%csrf_token%}
-    {{form.as_p}}
-    <button type="submit">login</button>
-    <br>
-    <div class="text-center">
-      Create a new account? <a class="link" href="{%url 'signup'%}">Register</a>
+  <body>
+   
+    <div class="vh-100 d-flex justify-content-center align-items-center">
+        <div class="col-md-4 ">
+            
+            <div class="card  bg-white shadow p-5 ">
+                <div class="mb-4 text-center">
+                  <div class="card-body">
+                    <h1 class="card-title fw-bold text-center">Welcome Back!</h1>
+                    {%if messages%}
+                          {%for m in messages %}
+          
+                          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong> login</strong> {{m}}.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                          {%endfor%}
+                      {%endif%}
+          
+          
+                    <!-- =========== form starts =========== -->
+                    {%if form.errors%}
+                    {{form.errors}}
+                    {%endif%}
+                
+                    <form action="" method="post">
+                      {%csrf_token%}
+                      <div class="input-group mt-4">
+                        <span class="input-group-text" id="basic-addon1">
+                          <i class="fa-solid fa-user" style="color: #941cad;"></i>
+                        </span>
+                        <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" >
+                      </div>
+                      <div class="input-group mt-4">
+                        <span class="input-group-text" id="basic-addon1">
+                          <i class="fa-solid fa-lock" style="color: #941cad;"></i>
+                        </span>
+                        <input type="password" name="password" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1">
+                      </div>
+                      <div class="d-flex justify-content-center">
+                        <button type="submit" class="button login__submit">Log IN Now</button>
+                      </div>
+                    </form>
+                    <!-- =========== form ends =========== -->
+                      <hr>
+                      <div class="text-center">
+                        Create a new account? <a class="link" href="{%url 'signup'%}">Sign-Up</a>
+                      </div>
+                  </div>
+          
+  
+  
+  
+                </div>
+            </div>
+        </div>
     </div>
-</form>
-</body>
-</html>
+  </body>
+  
+  </html>
+  
+  
+                      
+  

@@ -119,6 +119,40 @@ class ComplaintView(CreateView):
         form.instance.complainant = self.request.user
         return super().form_valid(form)
 
+class ComplaintListView(ListView):
+    model = Complaint
+    template_name = 'complaint_list.html'
+    context_object_name = 'complaints'
+
+class ComplaintDetailView(DetailView):
+    template_name="complaintview.html"
+    model=Complaint
+    context_object_name="data"
+
+
+
+class ComplaintUpdateView(View):
+        def get(self,request,*args,**kwargs):
+            id=kwargs.get("pk")
+            obj=Complaint.objects.get(id=id)
+            form=Complaintforms(instance=obj)
+            return render(request,"Complaint_list.html",{"form":form})
+        
+        def post(self,request,*args,**kwargs):
+            id=kwargs.get("pk")
+            obj=Complaint.objects.get(id=id)
+            form=Complaintforms(request.POST,instance=obj)
+
+            if form.is_valid():
+                form.save()
+                messages.success(request,"complaint updates changed")
+
+                return redirect("complaint_all")
+            else:
+                messages.error(request,"failed to change ")
+
+                return render(request,"Complaint_list.html",{"form":form})
+
 class PoliceIndexView(TemplateView):
     template_name="police_index.html"
 
@@ -132,6 +166,12 @@ class SaftytipsView(CreateView):
     form_class = SaftytipsForm
     template_name = 'safty_tips.html'
     success_url = reverse_lazy('user-index')
+
+class SafetyTipListView(ListView):
+    model = Saftytips
+    template_name = 'saftytips_list.html'  # Replace 'safetytip_list.html' with your actual template
+    context_object_name = 'saftytips'
+
 
 class PoliceDetailView(TemplateView):
     template_name = "policedetails.html"
@@ -157,7 +197,15 @@ class EmailAlertView(View):
 
 
 
-class ComplaintDetailView(DetailView):
-    template_name="complaintview.html"
-    model=Complaint
-    context_object_name="data"
+class PoliceUpdateView(UpdateView):
+    template_name="add_policestation.html.html"  
+    form_class=PoliceProfileForm
+    model=PoliceProfile  
+    def get_success_url(self):
+        return reverse("admin-index")
+    
+class PoliceDeleteView(View):
+    def get(self,request,*args,**kwargs):
+        id=kwargs.get("pk")
+        PoliceProfile.objects.get(id=id).delete()
+        return redirect("admin-index")

@@ -6,10 +6,97 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>Complaints</h1>
     <form action="" method="post" enctype="multipart/form-data">
         {%csrf_token%}
         {{form.as_p}}
         <button type="submit">Add</button>
     </form>
+
+<!-- <div class="col-lg middle middle-complaint-con">
+        <i class="fas fa-folder-open fa-4x comp-folder-icon"></i>
+        <h1 class="all-comp">New Complaint</h1>
+
+        <form class="" action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-control col-lg-10 comp-title-field"> {{form.title}} </div>
+            <p class="desc">Description</p>
+            <button type="button" class="btn btn-secondary preview-btn">Preview</button>
+            <textarea class="form-control comp-textarea" rows="7" placeholder="Enter text here"></textarea>
+            <button type="file" name="myfile" class="btn btn-secondary attach-btn"><i class="fas fa-file-upload"></i> Attachment</button>
+            <button type="submit" class="btn btn-secondary save-btn" value="submit"><i class="fas fa-save"></i> Save</button>
+        </form>
+
+    </div> -->
+
+    <!-- <div class="container mt-5">
+
+        <form action="" method="post" class="d-flex justify-content-center">
+            {%csrf_token%}
+
+            {%for field in form%}
+              <div class="w-50 me-4">
+                {{field}}
+              </div>
+            {%endfor%}
+            <p>
+              <button type="submit" class="btn btn-outline-dark mb-3">Add Task</button>
+            </p>
+        </form>
+        <div class="container">
+          <div class="section d-flex justify-content-evenly">
+            <div class="card text-center p-3 shadow">
+              <h5 class="fw-bold ">Pending ToDos 
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+                  {{pending}}
+                </span>
+              </h5>
+              {%for todo in data%}
+                {%if todo.status == 'todo'%}
+                  <div class="alert alert-secondary" role="alert">
+                    {{todo.name}}
+                    <a href="{%url 'todo-change' todo.id%}?status=inprogress"><button class="btn btn-outline-warning"><i class="fa-solid fa-hourglass-start"></i></button></a>
+                  </div>
+                {%endif%}
+              {%endfor%}
+            </div>
+            <div class="card text-center p-3 shadow">
+              <h5 class="fw-bold">In Progress ToDos
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
+                  {{progress}}
+                </span>
+              </h5>
+              {%for todo in data%}
+                {%if todo.status == 'inprogress'%}
+                  <div class="alert alert-secondary" role="alert">
+                    {{todo.name}}
+                    <a href="{%url 'todo-change' todo.id%}?status=completed"><button class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></a>
+                  </div>
+                {%endif%}
+              {%endfor%}
+            </div>
+            <div class="card text-center p-3 shadow">
+              <h5 class="fw-bold">Completed ToDos
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                  {{done}}
+                </span>
+              </h5>
+              {%for todo in data%}
+              {%if todo.status == 'completed'%}
+                <div class="alert alert-secondary" role="alert">
+                  {{todo.name}}
+                  <a href="{%url 'todo-delete' todo.id%}"><button class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></button></a>
+                </div>
+              {%endif%}
+              {%endfor%}
+            </div>
+              
+          </div>
+
+        </div>
+        
+        
+    </div> -->
+    
 </body>
 </html>
